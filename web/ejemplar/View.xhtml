@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewEjemplarTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewEjemplarLabel_idEjemplar}"/>
+                    <h:outputText value="#{ejemplarController.selected.idEjemplar}" title="#{bundle.ViewEjemplarTitle_idEjemplar}"/>
+                    <h:outputText value="#{bundle.ViewEjemplarLabel_numeroEjemplar}"/>
+                    <h:outputText value="#{ejemplarController.selected.numeroEjemplar}" title="#{bundle.ViewEjemplarTitle_numeroEjemplar}"/>
+                    <h:outputText value="#{bundle.ViewEjemplarLabel_estadoConservacion}"/>
+                    <h:outputText value="#{ejemplarController.selected.estadoConservacion}" title="#{bundle.ViewEjemplarTitle_estadoConservacion}"/>
+                    <h:outputText value="#{bundle.ViewEjemplarLabel_idObra}"/>
+                    <h:outputText value="#{ejemplarController.selected.idObra}" title="#{bundle.ViewEjemplarTitle_idObra}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ejemplarController.destroyAndView}" value="#{bundle.ViewEjemplarDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewEjemplarEditLink}"/>
+                <br />
+                <h:commandLink action="#{ejemplarController.prepareCreate}" value="#{bundle.ViewEjemplarCreateLink}" />
+                <br />
+                <h:commandLink action="#{ejemplarController.prepareList}" value="#{bundle.ViewEjemplarShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewEjemplarIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

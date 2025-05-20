@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePrestamoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePrestamoLabel_idPrestamo}" for="idPrestamo" />
+                    <h:inputText id="idPrestamo" value="#{prestamoController.selected.idPrestamo}" title="#{bundle.CreatePrestamoTitle_idPrestamo}" required="true" requiredMessage="#{bundle.CreatePrestamoRequiredMessage_idPrestamo}"/>
+                    <h:outputLabel value="#{bundle.CreatePrestamoLabel_fechaInicio}" for="fechaInicio" />
+                    <h:inputText id="fechaInicio" value="#{prestamoController.selected.fechaInicio}" title="#{bundle.CreatePrestamoTitle_fechaInicio}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePrestamoLabel_fechaDevolucion}" for="fechaDevolucion" />
+                    <h:inputText id="fechaDevolucion" value="#{prestamoController.selected.fechaDevolucion}" title="#{bundle.CreatePrestamoTitle_fechaDevolucion}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePrestamoLabel_idEjemplar}" for="idEjemplar" />
+                    <h:selectOneMenu id="idEjemplar" value="#{prestamoController.selected.idEjemplar}" title="#{bundle.CreatePrestamoTitle_idEjemplar}" >
+                        <f:selectItems value="#{ejemplarController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreatePrestamoLabel_duiUsuario}" for="duiUsuario" />
+                    <h:selectOneMenu id="duiUsuario" value="#{prestamoController.selected.duiUsuario}" title="#{bundle.CreatePrestamoTitle_duiUsuario}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{prestamoController.create}" value="#{bundle.CreatePrestamoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{prestamoController.prepareList}" value="#{bundle.CreatePrestamoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePrestamoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

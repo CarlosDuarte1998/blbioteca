@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+    <style>
+        header {
+            font-family: "Montserrat", sans-serif;
+            background-color: white;
+            font-family: sans-serif;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 1rem 0 0.5rem;
+        }
+
+        .logo-container img {
+            height: 40px;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 14px;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            position: relative;
+        }
+
+        .menu button {
+            background: none;
+            border: none;
+            font: inherit;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            color: inherit;
+        }
+
+        .icon {
+            margin-left: 5px;
+        }
+
+        .icons-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .iconify {
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+        }
+    </style>
+</h:head>
+    <h:body>
+    <header>
+        <div class="logo-container">
+            <a href="/">
+                <img src="https://www.pierrecardin.com.sv/public/images/PierreCardin.png" alt="Pierre Cardin Logo" />
+            </a>
+        </div>
+
+        <div class="navbar">
+            <ul class="menu">
+                <li><button type="button"><h:link outcome="/autor/List" value="Autor "/></button></li>
+                <li><button type="button"><h:link outcome="/ejemplar/List" value="Ejemplar "/> </button></li>
+                <li><button type="button"><h:link outcome="/obra/List" value="Obra "/> </button></li>
+                <li><button type="button"><h:link outcome="/prestamo/List" value="Prestamo "/> </button></li>
+                 <li><button type="button"> <h:link outcome="/usuario/List" value="Usuario "/> </button></li>
+            </ul>
+        </div>
+    </header>
+</h:body>
+</html>
+
