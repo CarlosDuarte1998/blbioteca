@@ -7,7 +7,10 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListObraTitle}" />
+            <!-- <h:outputText value="#{bundle.ListObraTitle}" /> -->
+            <h1>
+                Obra
+            </h1>
         </ui:define>
 
         <ui:define name="body">
@@ -17,10 +20,11 @@
                 </h:panelGroup>
 
                 <h:outputText escape="false" value="#{bundle.ListObraEmpty}" rendered="#{obraController.items.rowCount == 0}" />
+                
 
                 <h:panelGroup rendered="#{obraController.items.rowCount > 0}">
                     <div class="mb-3">
-                        <span>#{obraController.pagination.pageFirstItem + 1}..#{obraController.pagination.pageLastItem + 1}/#{obraController.pagination.itemsCount}</span>
+                
                         <h:commandLink action="#{obraController.previous}" value="#{bundle.Previous} #{obraController.pagination.pageSize}"
                                        rendered="#{obraController.pagination.hasPreviousPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
                         <h:commandLink action="#{obraController.next}" value="#{bundle.Next} #{obraController.pagination.pageSize}"
