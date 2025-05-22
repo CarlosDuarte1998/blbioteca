@@ -7,28 +7,36 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListPrestamoTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListPrestamoTitle}" />
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form styleClass="card p-4">
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListPrestamoEmpty}" rendered="#{prestamoController.items.rowCount == 0}"/>
+
+                <h:outputText escape="false" value="#{bundle.ListPrestamoEmpty}" rendered="#{prestamoController.items.rowCount == 0}" />
+
                 <h:panelGroup rendered="#{prestamoController.items.rowCount > 0}">
-                    <h:outputText value="#{prestamoController.pagination.pageFirstItem + 1}..#{prestamoController.pagination.pageLastItem + 1}/#{prestamoController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{prestamoController.previous}" value="#{bundle.Previous} #{prestamoController.pagination.pageSize}" rendered="#{prestamoController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{prestamoController.next}" value="#{bundle.Next} #{prestamoController.pagination.pageSize}" rendered="#{prestamoController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{prestamoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <div class="mb-3">
+                        <span>#{prestamoController.pagination.pageFirstItem + 1}..#{prestamoController.pagination.pageLastItem + 1}/#{prestamoController.pagination.itemsCount}</span>
+                        <h:commandLink action="#{prestamoController.previous}" value="#{bundle.Previous} #{prestamoController.pagination.pageSize}"
+                                       rendered="#{prestamoController.pagination.hasPreviousPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                        <h:commandLink action="#{prestamoController.next}" value="#{bundle.Next} #{prestamoController.pagination.pageSize}"
+                                       rendered="#{prestamoController.pagination.hasNextPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                    </div>
+
+                    <h:dataTable value="#{prestamoController.items}" var="item" border="0" cellpadding="2" cellspacing="0"
+                                 rowClasses="table-primary,table-secondary " rules="all" styleClass="table table-bordered table-striped tabla_dinamica">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPrestamoTitle_idPrestamo}"/>
+                                <h:outputText value="#{bundle.ListPrestamoTitle_idPrestamo}" />
                             </f:facet>
-                            <h:outputText value="#{item.idPrestamo}"/>
+                            <h:outputText value="#{item.idPrestamo}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPrestamoTitle_fechaInicio}"/>
+                                <h:outputText value="#{bundle.ListPrestamoTitle_fechaInicio}" />
                             </f:facet>
                             <h:outputText value="#{item.fechaInicio}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -36,7 +44,7 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPrestamoTitle_fechaDevolucion}"/>
+                                <h:outputText value="#{bundle.ListPrestamoTitle_fechaDevolucion}" />
                             </f:facet>
                             <h:outputText value="#{item.fechaDevolucion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -44,33 +52,33 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPrestamoTitle_idEjemplar}"/>
+                                <h:outputText value="#{bundle.ListPrestamoTitle_idEjemplar}" />
                             </f:facet>
-                            <h:outputText value="#{item.idEjemplar}"/>
+                            <h:outputText value="#{item.idEjemplar}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPrestamoTitle_duiUsuario}"/>
+                                <h:outputText value="#{bundle.ListPrestamoTitle_duiUsuario}" />
                             </f:facet>
-                            <h:outputText value="#{item.duiUsuario}"/>
+                            <h:outputText value="#{item.duiUsuario}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="&nbsp;" />
                             </f:facet>
-                            <h:commandLink action="#{prestamoController.prepareView}" value="#{bundle.ListPrestamoViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{prestamoController.prepareEdit}" value="#{bundle.ListPrestamoEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{prestamoController.destroy}" value="#{bundle.ListPrestamoDestroyLink}"/>
+                            <h:commandLink action="#{prestamoController.prepareView}" value="#{bundle.ListPrestamoViewLink}" styleClass="btn btn-link btn-sm" />
+                            <h:commandLink action="#{prestamoController.prepareEdit}" value="#{bundle.ListPrestamoEditLink}" styleClass="btn btn-link btn-sm ms-2" />
+                            <h:commandLink action="#{prestamoController.destroy}" value="#{bundle.ListPrestamoDestroyLink}" styleClass="btn btn-link btn-sm ms-2" />
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{prestamoController.prepareCreate}" value="#{bundle.ListPrestamoCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListPrestamoIndexLink}"/>
+
+                <div class="mt-3">
+                    <h:commandLink action="#{prestamoController.prepareCreate}" value="#{bundle.ListPrestamoCreateLink}" styleClass="btn btn-primary" />
+                </div>
+                <div class="mt-3">
+                    <h:link outcome="/index" value="#{bundle.ListPrestamoIndexLink}" styleClass="btn btn-secondary" />
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -1,30 +1,84 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        
-        <ui:include src="/includes/header.xhtml"/>
-        <br />
-        <h:link outcome="/autor/List" value="Show All Autor Items"/>
-        <br />
-        <h:link outcome="/ejemplar/List" value="Show All Ejemplar Items"/>
-        <br />
-        <h:link outcome="/obra/List" value="Show All Obra Items"/>
-        <br />
-        <h:link outcome="/prestamo/List" value="Show All Prestamo Items"/>
-        <br />
-        <h:link outcome="/usuario/List" value="Show All Usuario Items"/>
-    </h:body>
+<h:head>
+    <title>Biblioteca Nacional - Inicio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <h:outputStylesheet name="css/jsfcrud.css"/>
+</h:head>
 
+<h:body class="bg-light">
 
+    <!-- Header -->
+    <ui:include src="/includes/header.xhtml"/>
 
+    <!-- Contenedor principal -->
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h1 class="display-4">Bienvenido a la Biblioteca Nacional</h1>
+            <p class="lead">Sistema de gestión de préstamos y consulta de obras</p>
+        </div>
 
+        <!-- Tarjetas de navegación -->
+        <div class="row justify-content-center g-4">
 
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Autores</h5>
+                        <p class="card-text">Consulta y administra autores registrados.</p>
+                        <h:link outcome="/autor/List" styleClass="btn btn-primary">Ver Autores</h:link>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ejemplares</h5>
+                        <p class="card-text">Consulta los ejemplares disponibles por obra.</p>
+                        <h:link outcome="/ejemplar/List" styleClass="btn btn-primary">Ver Ejemplares</h:link>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Obras</h5>
+                        <p class="card-text">Administra las obras disponibles en el sistema.</p>
+                        <h:link outcome="/obra/List" styleClass="btn btn-primary">Ver Obras</h:link>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Préstamos</h5>
+                        <p class="card-text">Consulta y administra los préstamos activos.</p>
+                        <h:link outcome="/prestamo/List" styleClass="btn btn-primary">Ver Préstamos</h:link>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Usuarios</h5>
+                        <p class="card-text">Consulta la lista de usuarios registrados.</p>
+                        <h:link outcome="/usuario/List" styleClass="btn btn-primary">Ver Usuarios</h:link>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (opcional para algunos componentes interactivos) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</h:body>
 </html>
-

@@ -7,60 +7,69 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListEjemplarTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListEjemplarTitle}" />
         </ui:define>
+
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form styleClass="card p-4">
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListEjemplarEmpty}" rendered="#{ejemplarController.items.rowCount == 0}"/>
+
+                <h:outputText escape="false" value="#{bundle.ListEjemplarEmpty}" rendered="#{ejemplarController.items.rowCount == 0}" />
+
                 <h:panelGroup rendered="#{ejemplarController.items.rowCount > 0}">
-                    <h:outputText value="#{ejemplarController.pagination.pageFirstItem + 1}..#{ejemplarController.pagination.pageLastItem + 1}/#{ejemplarController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{ejemplarController.previous}" value="#{bundle.Previous} #{ejemplarController.pagination.pageSize}" rendered="#{ejemplarController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{ejemplarController.next}" value="#{bundle.Next} #{ejemplarController.pagination.pageSize}" rendered="#{ejemplarController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{ejemplarController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <div class="mb-3">
+                        <span>#{ejemplarController.pagination.pageFirstItem + 1}..#{ejemplarController.pagination.pageLastItem + 1}/#{ejemplarController.pagination.itemsCount}</span>
+                        <h:commandLink action="#{ejemplarController.previous}" value="#{bundle.Previous} #{ejemplarController.pagination.pageSize}"
+                                       rendered="#{ejemplarController.pagination.hasPreviousPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                        <h:commandLink action="#{ejemplarController.next}" value="#{bundle.Next} #{ejemplarController.pagination.pageSize}"
+                                       rendered="#{ejemplarController.pagination.hasNextPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                    </div>
+
+                    <h:dataTable value="#{ejemplarController.items}" var="item" border="0" cellpadding="2" cellspacing="0"
+                                 rowClasses="table-primary,table-secondary" rules="all" styleClass="table table-bordered table-striped tabla_dinamica">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEjemplarTitle_idEjemplar}"/>
+                                <h:outputText value="#{bundle.ListEjemplarTitle_idEjemplar}" />
                             </f:facet>
-                            <h:outputText value="#{item.idEjemplar}"/>
+                            <h:outputText value="#{item.idEjemplar}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEjemplarTitle_numeroEjemplar}"/>
+                                <h:outputText value="#{bundle.ListEjemplarTitle_numeroEjemplar}" />
                             </f:facet>
-                            <h:outputText value="#{item.numeroEjemplar}"/>
+                            <h:outputText value="#{item.numeroEjemplar}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEjemplarTitle_estadoConservacion}"/>
+                                <h:outputText value="#{bundle.ListEjemplarTitle_estadoConservacion}" />
                             </f:facet>
-                            <h:outputText value="#{item.estadoConservacion}"/>
+                            <h:outputText value="#{item.estadoConservacion}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEjemplarTitle_idObra}"/>
+                                <h:outputText value="#{bundle.ListEjemplarTitle_idObra}" />
                             </f:facet>
-                            <h:outputText value="#{item.idObra}"/>
+                            <h:outputText value="#{item.idObra}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="&nbsp;" />
                             </f:facet>
-                            <h:commandLink action="#{ejemplarController.prepareView}" value="#{bundle.ListEjemplarViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{ejemplarController.prepareEdit}" value="#{bundle.ListEjemplarEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{ejemplarController.destroy}" value="#{bundle.ListEjemplarDestroyLink}"/>
+                            <h:commandLink action="#{ejemplarController.prepareView}" value="#{bundle.ListEjemplarViewLink}" styleClass="btn btn-link btn-sm" />
+                            <h:commandLink action="#{ejemplarController.prepareEdit}" value="#{bundle.ListEjemplarEditLink}" styleClass="btn btn-link btn-sm ms-2" />
+                            <h:commandLink action="#{ejemplarController.destroy}" value="#{bundle.ListEjemplarDestroyLink}" styleClass="btn btn-link btn-sm ms-2" />
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{ejemplarController.prepareCreate}" value="#{bundle.ListEjemplarCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListEjemplarIndexLink}"/>
+
+                <div class="mt-3">
+                    <h:commandLink action="#{ejemplarController.prepareCreate}" value="#{bundle.ListEjemplarCreateLink}" styleClass="btn btn-primary" />
+                </div>
+                <div class="mt-3">
+                    <h:link outcome="/index" value="#{bundle.ListEjemplarIndexLink}" styleClass="btn btn-secondary" />
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

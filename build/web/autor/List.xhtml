@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -7,62 +8,72 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListAutorTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListAutorTitle}" />
         </ui:define>
+
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form styleClass="card p-4">
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListAutorEmpty}" rendered="#{autorController.items.rowCount == 0}"/>
+
+                <h:outputText escape="false" value="#{bundle.ListAutorEmpty}" 
+                              rendered="#{autorController.items.rowCount == 0}" />
+
                 <h:panelGroup rendered="#{autorController.items.rowCount > 0}">
-                    <h:outputText value="#{autorController.pagination.pageFirstItem + 1}..#{autorController.pagination.pageLastItem + 1}/#{autorController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{autorController.previous}" value="#{bundle.Previous} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{autorController.next}" value="#{bundle.Next} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{autorController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <div class="mb-3">
+                        <span>#{autorController.pagination.pageFirstItem + 1}..#{autorController.pagination.pageLastItem + 1}/#{autorController.pagination.itemsCount}</span>
+                        <h:commandLink action="#{autorController.previous}" value="#{bundle.Previous} #{autorController.pagination.pageSize}"
+                                       rendered="#{autorController.pagination.hasPreviousPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                        <h:commandLink action="#{autorController.next}" value="#{bundle.Next} #{autorController.pagination.pageSize}"
+                                       rendered="#{autorController.pagination.hasNextPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                    </div>
+
+                    <h:dataTable value="#{autorController.items}" var="item" border="0" cellpadding="2" cellspacing="0"
+                                 rowClasses="table-primary,table-secondary" rules="all" 
+                                 styleClass="table table-bordered table-striped tabla_dinamica">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAutorTitle_idAutor}"/>
+                                <h:outputText value="#{bundle.ListAutorTitle_idAutor}" />
                             </f:facet>
-                            <h:outputText value="#{item.idAutor}"/>
+                            <h:outputText value="#{item.idAutor}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAutorTitle_nombre}"/>
+                                <h:outputText value="#{bundle.ListAutorTitle_nombre}" />
                             </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
+                            <h:outputText value="#{item.nombre}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAutorTitle_nacionalidad}"/>
+                                <h:outputText value="#{bundle.ListAutorTitle_nacionalidad}" />
                             </f:facet>
-                            <h:outputText value="#{item.nacionalidad}"/>
+                            <h:outputText value="#{item.nacionalidad}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAutorTitle_sexo}"/>
+                                <h:outputText value="#{bundle.ListAutorTitle_sexo}" />
                             </f:facet>
-                            <h:outputText value="#{item.sexo}"/>
+                            <h:outputText value="#{item.sexo}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="&nbsp;" />
                             </f:facet>
-                            <h:commandLink action="#{autorController.prepareView}" value="#{bundle.ListAutorViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{autorController.prepareEdit}" value="#{bundle.ListAutorEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{autorController.destroy}" value="#{bundle.ListAutorDestroyLink}"/>
+                            <h:commandLink action="#{autorController.prepareView}" value="#{bundle.ListAutorViewLink}" styleClass="btn btn-link btn-sm" />
+                            <h:commandLink action="#{autorController.prepareEdit}" value="#{bundle.ListAutorEditLink}" styleClass="btn btn-link btn-sm ms-2" />
+                            <h:commandLink action="#{autorController.destroy}" value="#{bundle.ListAutorDestroyLink}" styleClass="btn btn-link btn-sm ms-2" />
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{autorController.prepareCreate}" value="#{bundle.ListAutorCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListAutorIndexLink}"/>
+
+                <div class="mt-3">
+                    <h:commandLink action="#{autorController.prepareCreate}" value="#{bundle.ListAutorCreateLink}" styleClass="btn btn-primary" />
+                </div>
+                <div class="mt-3">
+                    <h:link outcome="/index" value="#{bundle.ListAutorIndexLink}" styleClass="btn btn-secondary" />
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>
-
 </html>

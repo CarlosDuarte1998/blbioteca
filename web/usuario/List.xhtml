@@ -7,66 +7,74 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListUsuarioTitle}" />
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form styleClass="card p-4">
                 <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}"/>
+
+                <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}" />
+
                 <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
-                    <h:outputText value="#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <div class="mb-3">
+                        <span>#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}</span>
+                        <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}"
+                                       rendered="#{usuarioController.pagination.hasPreviousPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                        <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}"
+                                       rendered="#{usuarioController.pagination.hasNextPage}" styleClass="btn btn-sm btn-outline-primary ms-2" />
+                    </div>
+
+                    <h:dataTable  value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0"
+                                 rowClasses="table-primary,table-secondary" rules="all" styleClass="tabla_dinamica table table-bordered table-striped">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dui}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_dui}" />
                             </f:facet>
-                            <h:outputText value="#{item.dui}"/>
+                            <h:outputText value="#{item.dui}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}" />
                             </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
+                            <h:outputText value="#{item.nombre}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_direccion}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_direccion}" />
                             </f:facet>
-                            <h:outputText value="#{item.direccion}"/>
+                            <h:outputText value="#{item.direccion}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_telefono}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_telefono}" />
                             </f:facet>
-                            <h:outputText value="#{item.telefono}"/>
+                            <h:outputText value="#{item.telefono}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_duiAval}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_duiAval}" />
                             </f:facet>
-                            <h:outputText value="#{item.duiAval}"/>
+                            <h:outputText value="#{item.duiAval}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="&nbsp;" />
                             </f:facet>
-                            <h:commandLink action="#{usuarioController.prepareView}" value="#{bundle.ListUsuarioViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuarioController.prepareEdit}" value="#{bundle.ListUsuarioEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}"/>
+                            <h:commandLink action="#{usuarioController.prepareView}" value="#{bundle.ListUsuarioViewLink}" styleClass="btn btn-link btn-sm" />
+                            <h:commandLink action="#{usuarioController.prepareEdit}" value="#{bundle.ListUsuarioEditLink}" styleClass="btn btn-link btn-sm ms-2" />
+                            <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}" styleClass="btn btn-link btn-sm ms-2" />
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ListUsuarioCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListUsuarioIndexLink}"/>
+
+                <div class="mt-3">
+                    <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ListUsuarioCreateLink}" styleClass="btn btn-primary" />
+                </div>
+                <div class="mt-3">
+                    <h:link outcome="/index" value="#{bundle.ListUsuarioIndexLink}" styleClass="btn btn-secondary" />
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>
