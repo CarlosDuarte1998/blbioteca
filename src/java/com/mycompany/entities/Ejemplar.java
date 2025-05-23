@@ -134,5 +134,4 @@ public class Ejemplar implements Serializable {
     public String toString() {
         return "com.mycompany.entities.Ejemplar[ idEjemplar=" + idEjemplar + " ]";
     }
-    
 }

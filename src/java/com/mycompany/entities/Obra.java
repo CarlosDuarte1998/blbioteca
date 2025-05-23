@@ -164,7 +164,7 @@ public class Obra implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.entities.Obra[ idObra=" + idObra + " ]";
+        return titulo + "|"+ idObra ;
     }
     
 }

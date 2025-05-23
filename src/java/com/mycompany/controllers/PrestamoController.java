@@ -23,9 +23,11 @@ import javax.faces.model.SelectItem;
 public class PrestamoController implements Serializable {
 
     private Prestamo current;
-    private DataModel items = null;
+    private DataModel<Prestamo> items = null;
+
     @EJB
-    private com.mycompany.services.PrestamoFacade ejbFacade;
+    private PrestamoFacade ejbFacade;
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -47,15 +49,16 @@ public class PrestamoController implements Serializable {
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
-
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
                 }
 
                 @Override
-                public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                public DataModel<Prestamo> createPageDataModel() {
+                    return new ListDataModel<>(getFacade().findRange(new int[]{
+                        getPageFirstItem(), getPageFirstItem() + getPageSize()
+                    }));
                 }
             };
         }
@@ -68,8 +71,8 @@ public class PrestamoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Prestamo) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        current = items.getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + items.getRowIndex();
         return "View";
     }
 
@@ -91,8 +94,8 @@ public class PrestamoController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Prestamo) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        current = items.getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + items.getRowIndex();
         return "Edit";
     }
 
@@ -108,8 +111,8 @@ public class PrestamoController implements Serializable {
     }
 
     public String destroy() {
-        current = (Prestamo) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        current = items.getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + items.getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -120,13 +123,7 @@ public class PrestamoController implements Serializable {
         performDestroy();
         recreateModel();
         updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
+        return selectedItemIndex >= 0 ? "View" : "List";
     }
 
     private void performDestroy() {
@@ -141,9 +138,7 @@ public class PrestamoController implements Serializable {
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
-            // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
-            // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
@@ -153,7 +148,7 @@ public class PrestamoController implements Serializable {
         }
     }
 
-    public DataModel getItems() {
+    public DataModel<Prestamo> getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
@@ -188,7 +183,7 @@ public class PrestamoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Prestamo getPrestamo(java.lang.Integer id) {
+    public Prestamo getPrestamo(Integer id) {
         return ejbFacade.find(id);
     }
 
@@ -197,24 +192,12 @@ public class PrestamoController implements Serializable {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
+            if (value == null || value.isEmpty()) {
                 return null;
             }
-            PrestamoController controller = (PrestamoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "prestamoController");
-            return controller.getPrestamo(getKey(value));
-        }
-
-        java.lang.Integer getKey(String value) {
-            java.lang.Integer key;
-            key = Integer.valueOf(value);
-            return key;
-        }
-
-        String getStringKey(java.lang.Integer value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
+            PrestamoController controller = (PrestamoController) facesContext.getApplication().getELResolver()
+                    .getValue(facesContext.getELContext(), null, "prestamoController");
+            return controller.getPrestamo(Integer.valueOf(value));
         }
 
         @Override
@@ -224,12 +207,11 @@ public class PrestamoController implements Serializable {
             }
             if (object instanceof Prestamo) {
                 Prestamo o = (Prestamo) object;
-                return getStringKey(o.getIdPrestamo());
+                return o.getIdPrestamo() != null ? o.getIdPrestamo().toString() : "";
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Prestamo.class.getName());
+                throw new IllegalArgumentException("Objeto " + object + " es de tipo " + object.getClass().getName()
+                        + "; se esperaba tipo: " + Prestamo.class.getName());
             }
         }
-
     }
-
 }
